@@ -21,7 +21,13 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit }) {
     }
 
     function submitHandler() {
+        const expenseData = {
+            amount: +inputValues.amount, // The + automatically converts the data to Number.
+            date: new Date(inputValues.date), 
+            description: inputValues.description
+        }
 
+        onSubmit(expenseData)
     }
 
     return (
