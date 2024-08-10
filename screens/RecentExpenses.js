@@ -3,6 +3,7 @@ import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput"
 import { ExpensesContext } from "../store/expenses-context"
 import { getDateMinusDays } from "../util/date"
 import { fetchExpenses } from "../util/http"
+import LoadingOverlay from "../components/UI/LoadingOverlay"
 
 const RecentExpenses = () => {
 
@@ -10,15 +11,23 @@ const RecentExpenses = () => {
 
   // const [fetchedExpenses, setFetchedExpenses] = useState([])
 
+  const [isFetching, setIsFetching] = useState(true)
+
   useEffect(() => {
     async function getExpenses() {
+      setIsFetching(true)
       const expenses = await fetchExpenses()
+      setIsFetching(false)
       // setFetchedExpenses(expenses)
       expensesCtx.setExpenses(expenses)
     }
 
     getExpenses()
   }, [])
+
+  if(isFetching) {
+    return <LoadingOverlay /> 
+  }
 
     const recentExpenses = expensesCtx.expenses.filter((expense) => {
     // const recentExpenses = fetchedExpenses.filter((expense) => {
