@@ -13,7 +13,9 @@ const ManageExpense = ({route, navigation}) => {
   const editedExpenseId = route.params?.expenseId
   const isEditing = !!editedExpenseId   // Turn the result to a boolean
 
-  const selectedExpense = expensesCtx.expenses.find((expense) => expense.id === editedExpenseId)
+  const selectedExpense = expensesCtx.expenses.find(
+    (expense) => expense.id === editedExpenseId
+  )
 
   useLayoutEffect(() => {
     navigation.setOptions({
